@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "bert-test"
+version = "0.1.0"
+description = ""
+authors = ["Sean Yi"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+datasets = "^2.18.0"
+transformers = "^4.38.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
