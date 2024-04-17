@@ -17,21 +17,29 @@ def main():
     tokenizer = AutoTokenizer.from_pretrained("bert-base-cased")
 
     def tokenize_function(examples):
-        return tokenizer(examples["text"], padding="max_length", truncation=True)
+        return tokenizer(
+            examples["text"],
+            padding="max_length",
+            truncation=True,
+            return_tensors="pt",
+        )
 
     tokenized_datasets = dataset.map(tokenize_function, batched=True)
+    tokenized_datasets = tokenized_datasets.remove_columns(["text"])
+    tokenized_datasets = tokenized_datasets.rename_column("label", "labels")
+    tokenized_datasets.set_format("torch")
 
     train_dataset = tokenized_datasets["train"]
     test_dataset = tokenized_datasets["test"]
 
     train_dataloader = DataLoader(
         dataset=train_dataset,
-        batch_size=8,
+        batch_size=1024,
         shuffle=True,
     )
     test_dataloader = DataLoader(
         dataset=test_dataset,
-        batch_size=8,
+        batch_size=1024,
     )
 
     model = AutoModelForSequenceClassification.from_pretrained(
