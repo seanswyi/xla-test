@@ -34,12 +34,12 @@ def main():
 
     train_dataloader = DataLoader(
         dataset=train_dataset,
-        batch_size=1024,
+        batch_size=32,
         shuffle=True,
     )
     test_dataloader = DataLoader(
         dataset=test_dataset,
-        batch_size=1024,
+        batch_size=32,
     )
 
     model = AutoModelForSequenceClassification.from_pretrained(
@@ -83,6 +83,8 @@ def main():
             lr_scheduler.step()
             optimizer.zero_grad()
 
+            xm.mark_step()
+
         model.eval()
 
         metric = evaluate.load("accuracy")
@@ -98,6 +100,7 @@ def main():
 
             logits = outputs.logits
             predictions = torch.argmax(logits, dim=-1)
+            predictions = predictions.detach().cpu().numpy()
             metric.add_batch(predictions=predictions, references=batch["labels"])
 
         metric.compute()
