@@ -15,6 +15,7 @@ poetry run poetry install
 # Install torch_xla with pip within the Poetry-managed environment
 echo "Installing torch_xla via pip..."
 poetry run pip install "torch_xla[tpu]~=2.2.0" -f https://storage.googleapis.com/libtpu-releases/index.html
+poetry run pip install jax[tpu] -f https://storage.googleapis.com/jax-releases/libtpu_releases.html
 
 echo "All installations completed."
 
