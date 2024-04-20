@@ -43,7 +43,8 @@ def main():
     )
 
     model = AutoModelForSequenceClassification.from_pretrained(
-        "bert-base-cased", num_labels=5
+        "bert-base-cased",
+        num_labels=5,
     )
     optimizer = AdamW(model.parameters(), lr=5e-5)
 
