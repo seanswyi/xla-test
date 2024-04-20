@@ -5,20 +5,11 @@ description = ""
 authors = ["Sean Yi"]
 readme = "README.md"
 
-[[tool.poetry.source]]
-name = "libtpu"
-url = "https://storage.googleapis.com/libtpu-releases/index.html"
-priority = "primary"
-
-[[tool.poetry.source]]
-name = "pypi"
-priority = "default"
-
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.10"
 datasets = "^2.18.0"
-torch = { url = "https://download.pytorch.org/whl/cu118/torch-2.2.0%2Bcu118-cp38-cp38-linux_x86_64.whl" }
-torch_xla = { version = "~2.2.0", extras = ["tpu"], source = "libtpu" }
+torch = { url = "https://download.pytorch.org/whl/cu118/torch-2.2.0%2Bcu118-cp310-cp310-linux_x86_64.whl" }
+scikit-learn = "^1.4.2"
 
 [build-system]
 requires = ["poetry-core"]
